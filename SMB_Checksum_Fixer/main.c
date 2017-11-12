@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-uint16_t readBigShort(FILE *file) {
+static uint16_t readBigShort(FILE *file) {
 	uint16_t c1 = (uint16_t)getc(file) << 8;
 	uint16_t c2 = (uint16_t)getc(file);
 	return (c1 | c2);
 }
 
-void writeBigShort(FILE *file, uint16_t value) {
+static void writeBigShort(FILE *file, uint16_t value) {
 	putc((value >> 8), file);
 	putc((value), file);
 }
@@ -40,9 +40,7 @@ static void fixChecksumLSB(const char *filepath) {
 	fread(bytes, sizeof(uint8_t), datasize, file);
 
 	// Loop through bytes and calculate the checksum
-
 	uint16_t generatorPolynomial = 0x8408;
-
 	uint16_t checksum = 0xFFFF;
 
 	for (uint32_t i = 0; i < datasize; i++) {
@@ -98,10 +96,7 @@ static void fixChecksumMSB(const char *filepath) {
 	fread(bytes, sizeof(uint8_t), datasize, file);
 
 	// Loop through bytes and calculate the checksum
-
 	uint16_t generatorPolynomial = 0x1021;
-
-
 	uint16_t checksum = 0xFFFF;
 
 	for (uint32_t i = 0; i < datasize; i++) {
