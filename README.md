@@ -24,4 +24,6 @@ Just drag the save file on the executable to apply a new checksum.
 
 * CraftedCart for helping debug
 
+* Saethlin for openmp syntax help and providing possible optimization flags
+
 * Wikipedia for having CRC pseudocode and explanations https://en.wikipedia.org/wiki/Computation_of_cyclic_redundancy_checks#Bit_ordering_.28endianness.29
