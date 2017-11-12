@@ -1,6 +1,6 @@
 # SMB_Checksum_Fixer
 
-A Program to calculate and apply the checksum for Super Mokney Ball save and replay files.
+A Program to calculate and apply the checksum for Super Mokney Ball 2 save and replay files.
 
 F-Zero GX uses a little endian version of this algorithm. You can see it in the fixChecksumLSB method
 
