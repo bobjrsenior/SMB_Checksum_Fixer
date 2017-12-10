@@ -95,11 +95,21 @@ static void fixChecksumMSB(const char *filepath) {
 	uint8_t *bytes = (uint8_t *)malloc(sizeof(uint8_t) * datasize);
 	fread(bytes, sizeof(uint8_t), datasize, file);
 
+	int loopEnd = datasize;
+
+	// Check if SMB1 normal game data
+	fseek(file, 0x19, SEEK_SET);
+	// Game has a '.' in the filename here
+	if (getc(file) == '.') {
+		// Stop at 0x5C02 for normal game data in SMB1 which has a fixed data size
+		loopEnd = 0x5C02;
+	}
+
 	// Loop through bytes and calculate the checksum
 	uint16_t generatorPolynomial = 0x1021;
 	uint16_t checksum = 0xFFFF;
 
-	for (uint32_t i = 0; i < datasize; i++) {
+	for (uint32_t i = 0; i < loopEnd; i++) {
 		checksum ^= (bytes[i] << 8);
 
 		for (int j = 0; j < 8; j++) {
