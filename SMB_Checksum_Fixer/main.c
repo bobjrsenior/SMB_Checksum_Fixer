@@ -99,7 +99,7 @@ static void fixChecksumMSB(const char *filepath) {
 
 	// Check if SMB1 normal game data
 	fseek(file, 0x19, SEEK_SET);
-	// Game has a '.' in the filename here
+	// SMB1 normal game data has a '.' in the filename here
 	if (getc(file) == '.') {
 		// Stop at 0x5C02 for normal game data in SMB1 which has a fixed data size
 		loopEnd = 0x5C02;
